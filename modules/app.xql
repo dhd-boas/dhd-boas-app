@@ -146,7 +146,7 @@ declare function app:nameOfIndexEntry($node as node(), $model as map (*)){
     let $entities := collection($app:editions)//tei:TEI//*[@ref=$withHash]
     let $terms := (collection($app:editions)//tei:TEI[.//tei:term[./text() eq substring-after($withHash, '#')]])
     let $noOfterms := count(($entities, $terms))
-    let $hit := collection($app:indices)//*[@xml:id=$searchkey]
+    let $hit := collection($app:indices)//*[@xml:id=$searchkey][1]
     let $name := if (contains(node-name($hit), 'person'))
         then
             <a class="reference" data-type="listperson.xml" data-key="{$searchkey}">{normalize-space(string-join($hit/tei:persName[1], ', '))}</a>
@@ -241,22 +241,29 @@ for $title in ($entities, $terms)
 declare function app:listPers($node as node(), $model as map(*)) {
     let $hitHtml := "hits.html?searchkey="
     for $person in doc($app:personIndex)//tei:listPerson/tei:person
-    let $gnd := $person/tei:note/tei:p[3]/text()
-    let $gnd_link := if ($gnd != "no gnd provided") then
-        <a href="{$gnd}">{$gnd}</a>
-        else
-        "-"
-        return
+      let $affiliation := for $x in $person//tei:affiliation
+        return <li>{$x/text()}</li>
+      let $xml_id := data($person/@xml:id)
+      let $ref := "#"||$xml_id
+      let $docs := for $x in collection($app:editions)//tei:TEI[.//@ref=$ref]
+        return <li>{$x//tei:title[1]/text()}</li>
+      return
         <tr>
-            <td>
-                <a href="{concat($hitHtml,data($person/@xml:id))}">{$person/tei:persName/tei:surname}</a>
-            </td>
             <td>
                 {$person/tei:persName/tei:forename}
             </td>
             <td>
-                {$gnd_link}
+                  <a href="{concat($hitHtml,data($person/@xml:id))}">
+                    {$person/tei:persName/tei:surname}
+                  </a>
             </td>
+              <td>
+                {$affiliation}
+              </td>
+              <td>
+                  {$docs}
+              </td>
+
         </tr>
 };
 
@@ -486,23 +493,20 @@ declare function app:listBibl($node as node(), $model as map(*)) {
 declare function app:listOrg($node as node(), $model as map(*)) {
     let $hitHtml := "hits.html?searchkey="
     for $item in doc($app:orgIndex)//tei:listOrg/tei:org
+    let $ref := "#"||data($item/@xml:id)
     let $altnames := normalize-space(string-join($item//tei:orgName[@type='alt'], ' '))
-    let $gnd := $item//tei:idno/text()
-    let $gnd_link := if ($gnd)
-        then
-            <a href="{$gnd}">{$gnd}</a>
-        else
-            'no normdata provided'
+    let $docs := for $x in collection($app:editions)//tei:TEI[.//@ref=$ref]
+      return <li>{$x//tei:title[1]/text()}</li>
    return
         <tr>
             <td>
                 <a href="{concat($hitHtml,data($item/@xml:id))}">{$item//tei:orgName[1]/text()}</a>
             </td>
             <td>
-                {$altnames}
+                {$docs}
             </td>
             <td>
-                {$gnd_link}
+                {$altnames}
             </td>
         </tr>
 };
