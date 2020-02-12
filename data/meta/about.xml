@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>About your application</title>
+                <author>
+                    <persName>
+                        <forename>Peter</forename>
+                        <surname>Andorfer</surname>
+                    </persName>
+                </author>
+            </titleStmt>
+            <publicationStmt>
+                <publisher/>
+                <availability>
+                       <licence target="https://creativecommons.org/licenses/by/4.0/">
+                           <p>The (CC BY 4.0)-License applies to this document.</p>
+                       </licence>
+                   </availability>
+            <tei:idno xmlns:tei="http://www.tei-c.org/ns/1.0" type="URI">https://id.acdh.oeaw.ac.at/dhd-boas-app/v1/meta/about.xml</tei:idno>
+                <tei:idno xmlns:tei="http://www.tei-c.org/ns/1.0" type="URI">http://hdl.handle.net/21.11115/0000-000B-D96C-8</tei:idno>
+            </publicationStmt>
+            <sourceDesc>
+                <p>Born digital.</p>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div>
+                <head>About</head>
+                <p>Some place to write your project</p>
+            </div>
+        </body>
+    </text>
+</TEI>

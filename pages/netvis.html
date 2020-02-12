@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div class="templates:surround?with=templates/page.html&amp;at=content">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"/>  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.css" rel="stylesheet" type="text/css"/>
+    
+    <style type="text/css">
+        #visualization {
+        width: 100%;
+        height: 600px;
+        border: 1px solid lightgray;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header" style="text-align:center;">
+                <h1>
+                    Personen, Orte, Bücher und Dokumente
+                </h1>
+                <h3>
+                    <a>
+                        <i class="fas fa-info" title="Info zum Personenregister" data-toggle="modal" data-target="#exampleModal"/>
+                    </a>
+                    |
+                    <a href="../analyze/persDocNetJson.xql">
+                        <i class="fas fa-download" title="Zeige Netzwerk Daten"/>
+                    </a>
+                </h3>
+            </div>
+            <div class="card-body" id="visualization"/>
+        </div>
+    </div>
+    
+    <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Info zum Netzwerk</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Die Grafik zeigt die transkribierten 
+                        <ul>
+                            <li>
+                                <strong style="color:#d11141">Dokumente</strong>,</li>
+                            <li>die darin erwähnten <strong style="color:#00b159">Personen</strong>,</li>
+                            <li>
+                                <strong style="color:#00aedb">Orte</strong> und</li>
+                            <li>
+                                <strong style="color:#f37735">Bücher</strong>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        var datasource = "../analyze/persDocNetJson.xql"
+        var container = document.getElementById('visualization');
+        $.getJSON( datasource, function( data ) {
+        var container = document.getElementById('visualization');
+        var data = {
+        nodes: data.nodes,
+        edges: data.edges
+        };
+        var options = {
+        "edges": {
+        "smooth": {
+        "type": "horizontal",
+        "roundness": 0
+        }
+        },
+        layout: {
+        improvedLayout: false
+        },
+        physics: {
+        stabilization: false,
+        barnesHut: {
+        gravitationalConstant: -5000,
+        springConstant: 0.01,
+        springLength: 10
+        }
+        },
+        };
+        var network = new vis.Network(container, data, options);
+        
+        });
+        
+    </script>
+</div>

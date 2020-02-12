@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/datatable.html" data-template-at="datatable">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Personenregister</h1>
+                        <a>
+                            <i class="fas fa-info" title="Info zum Personenregister" data-toggle="modal" data-target="#exampleModal"/>
+                            
+                        </a>
+                        <a href="../resolver/resolve-doc.xql?doc-name=listperson.xml&amp;collection=indices">
+                            <i class="fas fa-download" title="show TEI source"/>
+                        </a>
+                    </div>
+                    
+                    <div class="card-body containingloader">
+                        <div class="loader" id="loader"/>
+                        <table id="myTable" style="width:100%;display:none;" class="table table-striped table-condensed table-hover">   
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Vorname(n)</th>
+                                    <th>GND-ID</th>
+                                </tr>
+                                <tr id="filterrow">
+                                    <th>Name</th>
+                                    <th>Vorname(n)</th>
+                                    <th>GND-ID</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTableBody">
+                                <tr data-template="app:listPers"/>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Info zum Personenregister</h5>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    Eine Erklärung
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../resources/js/datatables.custom.js"/>
+</div>

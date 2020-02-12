@@ -1,0 +1,11 @@
+version: '2'
+services:
+  dhd-boas-app:
+    image: "acdh/dhd-boas-app"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/tmp/export

@@ -1,0 +1,18 @@
+version: '2'
+services:
+  dhd-boas-app:
+    image: "acdh/dhd-boas-app"
+    labels:
+      - traefik.backend=dhd-boas-app
+      - traefik.frontend.rule=Host:dhd-boas-app.sisyphos.arz.oeaw.ac.at
+      - traefik.docker.network=web
+      - traefik.port=8080
+    networks:
+      - web
+    build:
+      context: .
+      dockerfile: Dockerfile
+networks:
+  web:
+    external:
+      name: web

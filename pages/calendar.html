@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div class="templates:surround?with=templates/page.html&amp;at=content">
+    <link rel="stylesheet" href="../resources/css/bootstrap-year-calendar.min.css"/>
+    <script src="../resources/js/bootstrap-year-calendar-bs4/bootstrap-year-calendar.min.js"/>
+    <style>
+        
+        .container-fluid &gt; .card {
+        border-top:none;
+        }
+        
+        
+        th.prev::before {
+        font-family:"Font Awesome 5 Free";
+        font-weight: 900;
+        content:"\f053";
+        }
+        
+        th.next::before {
+        font-family:"Font Awesome 5 Free";
+        font-weight: 900;
+        content:"\f054";
+        }
+        
+        
+        .calendar .year-neighbor, .calendar .year-neighbor2  {
+        display:none !important;
+        }
+        
+        .calendar .card {
+        border-top:none;
+        }
+        
+        .calendar .calendar-header table th {
+        padding:0;
+        }
+        
+        .yearscol {
+        visibility: hidden;
+        }
+        
+        .yearbtn {
+        padding:2px;
+        border-radius:0;
+        background-color:transparent;
+        border:none;
+        font-size:0.9rem;
+        }
+        
+        
+        #years-table .btn-light:focus, #years-table .btn-light.focus {
+        box-shadow: 0 0 0 0.2rem rgba(3, 122, 51, 1);
+        }
+        
+    </style>
+    <div class="container-fluid">
+        <div class="loader" id="loader"/>
+        <div class="card">
+            <div class="card-header" style="text-align:center">
+                <h1 style="display:inline-block;margin-bottom:0;padding-right:5px;">
+                    Kalender</h1>
+                <a>
+                    <i class="fas fa-info" title="Info" data-toggle="modal" data-target="#exampleModal"/>
+                </a>
+                <a style="padding-left:5px;" href="../analyze/cache/calendar_datasource.json">
+                    <i class="fas fa-download" title="Data"/>
+                </a>
+            </div>
+            <div class="card-body containingloader">
+                <div class="row">
+                    <div class="col-sm-2 yearscol">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p style="text-align:center;font-weight:bold;margin-bottom:0;">Jahr</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center" id="years-table">
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div id="calendar"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Das Tagebuch in Kalenderansicht</h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Fünfzig Jahre lang legte Schnitzler nahezu täglich Einträge an. Über den Kalender können bestimmte Tage direkt aufgefunden werden.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../resources/js/bootstrap-year-calendar-bs4/languages/bootstrap-year-calendar.de.js" charset="UTF-8"/>
+    <script type="text/javascript" src="../resources/js/calendar.custom.js" charset="UTF-8"/>
+    
+</div>

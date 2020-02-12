@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="xar" name="dhd-boas-app">
+    <xmlproperty file="expath-pkg.xml"/>
+    <property name="project.version" value="${package(version)}"/>
+    <property name="project.app" value="dhd-boas-app"/>
+    <property name="build.dir" value="build"/>
+    <copy todir="./data/editions">
+      <fileset dir="../dhd-boas-data/dhd_2018/TEI"/>
+      <fileset dir="../dhd-boas-data/dhd_2019/TEI"/>
+      <fileset dir="../dhd-boas-data/dhd_2016/TEI"/>
+    </copy>
+    <copy todir="./data/indices">
+      <fileset dir="../dhd-boas-data/indices"/>
+    </copy>
+    <target name="xar">
+        <mkdir dir="${build.dir}"/>
+        <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar" excludes="${build.dir}/* data/temp/** temp/**"/>
+    </target>
+</project>
