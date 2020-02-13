@@ -18,7 +18,7 @@ declare variable $app:indices := $config:app-root||'/data/indices';
 declare variable $app:placeIndex := $config:app-root||'/data/indices/listplace.xml';
 declare variable $app:personIndex := $config:app-root||'/data/indices/listperson.xml';
 declare variable $app:orgIndex := $config:app-root||'/data/indices/listorg.xml';
-declare variable $app:workIndex := $config:app-root||'/data/indices/listwork.xml';
+declare variable $app:workIndex := $config:app-root||'/data/indices/listbibl.xml';
 declare variable $app:defaultXsl := doc($config:app-root||'/resources/xslt/xmlToHtml.xsl');
 declare variable $app:projectName := doc(concat($config:app-root, "/expath-pkg.xml"))//pkg:title//text();
 declare variable $app:authors := normalize-space(string-join(doc(concat($config:app-root, "/repo.xml"))//repo:author//text(), ', '));
@@ -466,25 +466,27 @@ return
 declare function app:listBibl($node as node(), $model as map(*)) {
     let $hitHtml := "hits.html?searchkey="
     for $item in doc($app:workIndex)//tei:listBibl/tei:bibl
-    let $author := normalize-space(string-join($item/tei:author//text(), ' '))
-    let $gnd := $item//tei:idno/text()
-    let $gnd_link := if ($gnd)
-        then
-            <a href="{$gnd}">{$gnd}</a>
-        else
-            'no normdata provided'
-   return
-        <tr>
-            <td>
-                <a href="{concat($hitHtml,data($item/@xml:id))}">{$item//tei:title[1]/text()}</a>
-            </td>
-            <td>
-                {$author}
-            </td>
-            <td>
-                {$gnd_link}
-            </td>
-        </tr>
+      let $title := normalize-space(string-join($item/text(), ' '))
+      let $xml_id := data($item/@xml:id)
+      let $lang := data($item/@xml:lang)
+      let $ref := '#'||$xml_id
+      let $docs := for $x in collection($app:editions)//tei:TEI[.//@ref=$ref]
+        return <li>{$x//tei:title[1]/text()}</li>
+       return
+            <tr>
+                <td>
+                    <a href="{concat($hitHtml, $xml_id)}">{$title}</a>
+                </td>
+                <td>
+                    {$lang}
+                </td>
+                <td>
+                    {$xml_id}
+                </td>
+                  <td>
+                      {$docs}
+                  </td>
+            </tr>
 };
 
 (:~
