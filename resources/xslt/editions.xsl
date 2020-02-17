@@ -13,8 +13,7 @@
     <xsl:param name="progress"/>
     <xsl:param name="projectName"/>
     <xsl:param name="authors"/>
-    
-        
+    <xsl:param name="doc-id"/>
     <xsl:variable name="signatur">
         <xsl:value-of select=".//tei:institution/text()"/>, <xsl:value-of select=".//tei:repository[1]/text()"/>, <xsl:value-of select=".//tei:msIdentifier/tei:idno[1]/text()"/>
     </xsl:variable>
@@ -48,16 +47,23 @@
                             <a>
                                 <i class="fas fa-info" title="show more info about the document" data-toggle="modal" data-target="#exampleModalLong"/>
                             </a>
-                            | 
+                            |
                             <a href="{$path2source}">
                                 <i class="fas fa-download" title="show TEI source"/>
+                            </a>
+                            |
+                            <a data-toggle="tooltip" title="Eintrag als Netzwerk-Graph visualisiert">
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="concat('../netvis/netvis.html?type=Abstract&amp;id=', $doc-id)"/>
+                                </xsl:attribute>
+                                <i class="fas fa-project-diagram"/>
                             </a>
                         </h2>
                         <h2 style="text-align:center;">
                             <input type="range" min="1" max="{$amount}" value="{$currentIx}" data-rangeslider="" style="width:100%;"/>
                             <a id="output" class="btn btn-main btn-outline-primary btn-sm" href="show.html?document=entry__1879-03-03.xml&amp;directory=editions" role="button">go to </a>
                         </h2>
-                        
+
                     </div>
                     <div class="col-md-2" style="text-align:right">
                         <xsl:if test="$next">
@@ -107,7 +113,7 @@
                             <cite title="Source Title">
                                 <xsl:value-of select="$signatur"/>, hg. v. <xsl:value-of select="$authors"/>, In: <xsl:value-of select="$projectName"/>
                             </cite>
-                        </blockquote>                    
+                        </blockquote>
                     </p>
                 </div>
             </div>
@@ -212,10 +218,10 @@
                                                 <td>no license provided</td>
                                             </xsl:otherwise>
                                         </xsl:choose>
-                                    </tr>                            
+                                    </tr>
                                 </tbody>
                             </table>
-                            
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -224,7 +230,7 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
     </xsl:template>
 </xsl:stylesheet>
