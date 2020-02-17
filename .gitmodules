@@ -1,0 +1,3 @@
+[submodule "netvis"]
+	path = netvis
+	url = https://github.com/KONDE-AT/dsebaseapp-netvis.git
