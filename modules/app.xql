@@ -241,28 +241,36 @@ for $title in ($entities, $terms)
 declare function app:listPers($node as node(), $model as map(*)) {
     let $hitHtml := "hits.html?searchkey="
     for $person in doc($app:personIndex)//tei:listPerson/tei:person
-      let $affiliation := for $x in $person//tei:affiliation
+      let $affiliations := $person//tei:affiliation
+      let $affiliation := for $x in $affiliations
         return <li>{$x/text()}</li>
       let $xml_id := data($person/@xml:id)
       let $ref := "#"||$xml_id
-      let $docs := for $x in collection($app:editions)//tei:TEI[.//@ref=$ref]
+      let $all_docs := collection($app:editions)//tei:TEI[.//@ref=$ref]
+      let $docs := for $x in $all_docs
         return <li>{$x//tei:title[1]/text()}</li>
       return
         <tr>
-            <td>
-                {$person/tei:persName/tei:forename}
-            </td>
             <td>
                   <a href="{concat($hitHtml,data($person/@xml:id))}">
                     {$person/tei:persName/tei:surname}
                   </a>
             </td>
               <td>
+                  {$person/tei:persName/tei:forename}
+              </td>
+              <td>
                 {$affiliation}
               </td>
+                <td>
+                  {count($affiliations)}
+                </td>
               <td>
                   {$docs}
               </td>
+                <td>
+                    {count($all_docs)}
+                </td>
 
         </tr>
 };
@@ -470,8 +478,12 @@ declare function app:listBibl($node as node(), $model as map(*)) {
       let $xml_id := data($item/@xml:id)
       let $lang := data($item/@xml:lang)
       let $ref := '#'||$xml_id
-      let $docs := for $x in collection($app:editions)//tei:TEI[.//@ref=$ref]
-        return <li>{$x//tei:title[1]/text()}</li>
+      let $doc_a := collection($app:editions)//tei:TEI[.//@ref=$ref]
+      let $docs := for $x in $doc_a
+        return
+          <li>
+            <a href="{app:hrefToDoc($x)}">{$x//tei:title[1]/text()}</a>
+          </li>
        return
             <tr>
                 <td>
@@ -486,6 +498,9 @@ declare function app:listBibl($node as node(), $model as map(*)) {
                   <td>
                       {$docs}
                   </td>
+                    <td>
+                        {count($doc_a)}
+                    </td>
             </tr>
 };
 
@@ -497,8 +512,12 @@ declare function app:listOrg($node as node(), $model as map(*)) {
     for $item in doc($app:orgIndex)//tei:listOrg/tei:org
     let $ref := "#"||data($item/@xml:id)
     let $altnames := normalize-space(string-join($item//tei:orgName[@type='alt'], ' '))
-    let $docs := for $x in collection($app:editions)//tei:TEI[.//@ref=$ref]
-      return <li>{$x//tei:title[1]/text()}</li>
+    let $doc_a := collection($app:editions)//tei:TEI[.//@ref=$ref]
+    let $docs := for $x in $doc_a
+      return
+        <li>
+          <a href="{app:hrefToDoc($x)}">{$x//tei:title[1]/text()}</a>
+        </li>
    return
         <tr>
             <td>
@@ -507,6 +526,9 @@ declare function app:listOrg($node as node(), $model as map(*)) {
             <td>
                 {$docs}
             </td>
+              <td>
+                  {count($doc_a)}
+              </td>
             <td>
                 {$altnames}
             </td>

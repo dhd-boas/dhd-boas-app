@@ -5,9 +5,10 @@
     <property name="project.app" value="dhd-boas-app"/>
     <property name="build.dir" value="build"/>
     <copy todir="./data/editions">
+      <fileset dir="../dhd-boas-data/dhd_2016/TEI"/>
       <fileset dir="../dhd-boas-data/dhd_2018/TEI"/>
       <fileset dir="../dhd-boas-data/dhd_2019/TEI"/>
-      <fileset dir="../dhd-boas-data/dhd_2016/TEI"/>
+      <fileset dir="../dhd-boas-data/dhd_2020/TEI"/>
     </copy>
     <copy todir="./data/indices">
       <fileset dir="../dhd-boas-data/indices"/>
