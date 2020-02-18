@@ -28,6 +28,7 @@ declare variable $app:purpose_en := "is the publication of research data.";
 
 declare variable $app:redmineBaseUrl := "https://shared.acdh.oeaw.ac.at/acdh-common-assets/api/imprint.php?serviceID=";
 declare variable $app:redmineID := "6930";
+declare variable $app:networkHtml := "../netvis/netvis.html?id=";
 
 declare function functx:contains-case-insensitive
   ( $arg as xs:string? ,
@@ -249,11 +250,15 @@ declare function app:listPers($node as node(), $model as map(*)) {
       let $all_docs := collection($app:editions)//tei:TEI[.//@ref=$ref]
       let $docs := for $x in $all_docs
         return <li>{$x//tei:title[1]/text()}</li>
+      let $netvis_url :=
+        <a href="{$app:networkHtml||$xml_id||'&amp;type=Person'}">
+          <i class="fas fa-project-diagram"/>
+        </a>
       return
         <tr>
             <td>
                   <a href="{concat($hitHtml,data($person/@xml:id))}">
-                    {$person/tei:persName/tei:surname}
+                    {$person/tei:persName/tei:surname}{$netvis_url}
                   </a>
             </td>
               <td>
@@ -271,7 +276,6 @@ declare function app:listPers($node as node(), $model as map(*)) {
                 <td>
                     {count($all_docs)}
                 </td>
-
         </tr>
 };
 
