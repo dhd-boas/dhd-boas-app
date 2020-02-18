@@ -395,6 +395,9 @@ declare function app:toc($node as node(), $model as map(*)) {
     for $title in $docs
         let $main_date := $title//tei:title//text()
         let $year := $title//tei:title[./@type="conf_year"]/text()
+        let $doctype := string-join($title//tei:keywords[@n='subcategory']//text(), '')
+        let $keywords := for $x in $title//tei:keywords[@n='keywords']//tei:term/text() return <li>{$x}</li>
+        let $topics := for $x in $title//tei:keywords[@n='topics']//tei:term/text() return <li>{$x}</li>
         let $orgs := for $x in distinct-values($title//tei:affiliation//text())
           return <li>{$x}</li>
         let $author := for $a in $title//tei:author//tei:*[name() = 'name' or name() = 'persName']
@@ -411,6 +414,9 @@ declare function app:toc($node as node(), $model as map(*)) {
             <td>{$year}</td>
             <td>{$author}</td>
             <td>{$orgs}</td>
+            <td>{$doctype}</td>
+            <td>{$keywords}</td>
+            <td>{$topics}</td>
         </tr>
 };
 
