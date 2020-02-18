@@ -52,8 +52,46 @@
                     <text type="xpath">substring(normalize-space(string-join($node//tei:body//text(), ' ')), 1, 75)</text>
                 </mandatoryProps>
             </target>
+            <target>
+              <xpath>$node/tei:affiliation</xpath>
+              <relationType>Institution</relationType>
+              <mandatoryProps>
+                  <id type="xpath">substring-after(data($node/@ref), '#')</id>
+                  <label type="xpath">$node/text()</label>
+                  <detail_view type="xpath">app:hrefToDoc($node, 'editions')</detail_view>
+                  <as_graph type="xpath">netvis:graph-url(substring-after(data($node/@ref), '#'), 'Institution')</as_graph>
+                  <type type="literal">Institution</type>
+                  <relationType type="literal">affillierte Institution</relationType>
+              </mandatoryProps>
+            </target>
           </relations>
         </Entity>
+        <Entity type="Institution">
+            <getId type="xpath">$entity-id</getId>
+            <getEntity type="xpath">doc($app:orgIndex)//tei:org[@xml:id=$id]</getEntity>
+            <mandatoryProps>
+                <id type="xpath">data($node/@xml:id)</id>
+                <label type="xpath">normalize-space(string-join($node//tei:orgName//text(), ' '))</label>
+                <detail_view type="xpath">concat('../pages/hits.html?searchkey=', data($node/@xml:id))</detail_view>
+                <as_graph type="xpath">netvis:graph-url($node/@xml:id, 'Institution')</as_graph>
+                <type type="literal">Institution</type>
+                <relationType type="literal">affillierte Institution</relationType>
+            </mandatoryProps>
+            <relations>
+              <target>
+                <xpath>doc($app:personIndex)//tei:person[.//tei:affiliation[@ref=concat('#', $node/@xml:id)]]</xpath>
+                <relationType>Institution von</relationType>
+                <mandatoryProps>
+                    <id type="xpath">data($node/@xml:id)</id>
+                    <label type="xpath">normalize-space(string-join($node/tei:persName//text(), ' '))</label>
+                    <detail_view type="xpath">app:hrefToDoc($node, 'editions')</detail_view>
+                    <as_graph type="xpath">netvis:graph-url(data($node/@xml:id), 'Person')</as_graph>
+                    <type type="literal">Person</type>
+                    <relationType type="literal">ist affillierte Institution</relationType>
+                </mandatoryProps>
+              </target>
+            </relations>
+          </Entity>
     </Nodes>
     <NodeTypes>
         <node>
@@ -65,6 +103,11 @@
             <id>Person</id>
             <color>#feb236</color>
             <label>Person</label>
+        </node>
+        <node>
+            <id>Institution</id>
+            <color>#28a745</color>
+            <label>Institution</label>
         </node>
     </NodeTypes>
 </netvisConfig>

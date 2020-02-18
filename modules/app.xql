@@ -446,6 +446,7 @@ let $xsl := if($xslPath eq "")
 let $path2source := "../resolver/resolve-doc.xql?doc-name="||$ref||"&amp;collection="||$collection
 let $params :=
 <parameters>
+    <param name="doc-id" value="{$ref}"/>
     <param name="app-name" value="{$config:app-name}"/>
     <param name="collection-name" value="{$collection}"/>
     <param name="path2source" value="{$path2source}"/>
