@@ -421,6 +421,22 @@ declare function app:toc($node as node(), $model as map(*)) {
 };
 
 (:~
+ : lists used keywords, their related abstracts (and amount)
+ :)
+declare function app:keywords($node as node(), $model as map(*)) {
+  let $keywords := distinct-values(collection($app:editions)//tei:keywords[@n='keywords']//tei:term/text())
+  for $x in $keywords
+    let $abstracts := collection($app:editions)//tei:TEI[.//tei:term/text()=$x]
+    let $abstracts_count := count($abstracts)
+    return
+    <tr>
+      <td>{$x}</td>
+      <td>{$abstracts_count}</td>
+      <td>franzi</td>
+    </tr>
+};
+
+(:~
  : perfoms an XSLT transformation
 :)
 declare function app:XMLtoHTML ($node as node(), $model as map (*), $query as xs:string?) {
