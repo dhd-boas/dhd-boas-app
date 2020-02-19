@@ -426,13 +426,41 @@ declare function app:toc($node as node(), $model as map(*)) {
 declare function app:keywords($node as node(), $model as map(*)) {
   let $keywords := distinct-values(collection($app:editions)//tei:keywords[@n='keywords']//tei:term/text())
   for $x in $keywords
-    let $abstracts := collection($app:editions)//tei:TEI[.//tei:term/text()=$x]
+    let $abstracts := collection($app:editions)//tei:TEI[.//tei:term=$x]
+    let $ab_doc := for $ab in $abstracts
+      let $ab_title := normalize-space(string-join($ab//tei:titleStmt//tei:title//text()))
+      return
+        <li>
+          <a href="{app:hrefToDoc($ab)}">{$ab_title}</a>
+        </li>
     let $abstracts_count := count($abstracts)
     return
     <tr>
       <td>{$x}</td>
+      <td>{$ab_doc}</td>
       <td>{$abstracts_count}</td>
-      <td>franzi</td>
+    </tr>
+};
+
+(:~
+ : lists used topics, their related abstracts (and amount)
+ :)
+declare function app:topics($node as node(), $model as map(*)) {
+  let $keywords := distinct-values(collection($app:editions)//tei:keywords[@n='topics']//tei:term/text())
+  for $x in $keywords
+    let $abstracts := collection($app:editions)//tei:TEI[.//tei:term=$x]
+    let $ab_doc := for $ab in $abstracts
+      let $ab_title := normalize-space(string-join($ab//tei:titleStmt//tei:title//text()))
+      return
+        <li>
+          <a href="{app:hrefToDoc($ab)}">{$ab_title}</a>
+        </li>
+    let $abstracts_count := count($abstracts)
+    return
+    <tr>
+      <td>{$x}</td>
+      <td>{$ab_doc}</td>
+      <td>{$abstracts_count}</td>
     </tr>
 };
 
