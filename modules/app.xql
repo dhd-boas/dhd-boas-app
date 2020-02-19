@@ -249,7 +249,7 @@ declare function app:listPers($node as node(), $model as map(*)) {
       let $ref := "#"||$xml_id
       let $all_docs := collection($app:editions)//tei:TEI[.//@ref=$ref]
       let $docs := for $x in $all_docs
-        return <li>{$x//tei:title[1]/text()}</li>
+        return <li><a href="{app:hrefToDoc($x)}">{$x//tei:title[1]/text()}</a></li>
       let $netvis_url :=
         <a href="{$app:networkHtml||$xml_id||'&amp;type=Person'}">
           <i class="fas fa-project-diagram"/>
@@ -407,7 +407,7 @@ declare function app:toc($node as node(), $model as map(*)) {
             then
                 <a href="{app:hrefToDoc($title, $collection)}">{$main_date}</a>
             else
-                <a href="{app:hrefToDoc($title)}">{app:getDocName($title)}</a>
+                <a href="{app:hrefToDoc($title)}">{$main_date}</a>
         return
         <tr>
             <td>{$link2doc}</td>
@@ -437,7 +437,6 @@ declare function app:keywords($node as node(), $model as map(*)) {
     return
     <tr>
       <td>{$x}</td>
-      <td>{$ab_doc}</td>
       <td>{$abstracts_count}</td>
     </tr>
 };
@@ -597,7 +596,7 @@ declare function app:firstDoc($node as node(), $model as map(*)) {
     let $all := sort(xmldb:get-child-resources($app:editions))
     let $href := "show.html?document="||$all[1]||"&amp;directory=editions"
         return
-            <a class="btn btn-main btn-outline-primary btn-lg" href="{$href}" role="button">Start Reading</a>
+            <a class="btn btn-main btn-outline-primary btn-lg" href="{$href}" role="button">Erster Abstract</a>
 };
 
 (:~
