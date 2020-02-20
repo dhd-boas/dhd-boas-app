@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround" data-template-with="templates/datatable.html" data-template-at="datatable">
+<div data-template="templates:surround" data-template-with="templates/dt_highcharts.html" data-template-at="dt_highcharts">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -12,6 +12,9 @@
                         </a>
                         <a href="../resolver/resolve-doc.xql?doc-name=listperson.xml&amp;collection=indices">
                             <i class="fas fa-download" title="show TEI source"/>
+                        </a>
+                        <a href="#chart">
+                          <i class="fas fa-chart-bar"/>
                         </a>
                     </div>
 
@@ -42,6 +45,14 @@
                         </table>
                     </div>
                 </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h2>Chart</h2>
+                  </div>
+                  <div class="card-body">
+                    <div id="chart"/>
+                  </div>
+                </div>
                 <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -62,5 +73,5 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="../resources/js/datatables.custom.js"/>
+    <script src="$app-root/resources/js/dt_high_persons.js"/>
 </div>
