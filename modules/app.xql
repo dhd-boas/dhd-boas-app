@@ -438,6 +438,7 @@ declare function app:keywords($node as node(), $model as map(*)) {
     <tr>
       <td>{$x}</td>
       <td>{$abstracts_count}</td>
+      <td>{$ab_doc}</td>
     </tr>
 };
 

@@ -1,56 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/datatable.html" data-template-at="datatable">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h1>Keywords</h1>
-                        <a>
-                            <i class="fas fa-info" title="Info zu Keywords" data-toggle="modal" data-target="#exampleModal"/>
-                        </a>
-                    </div>
-
-                    <div class="card-body containingloader">
-                        <div class="loader" id="loader"/>
-                        <table id="myTable" style="width:100%;display:none;" class="table table-striped table-condensed table-hover">
-                        <thead>
-                    <tr>
-                        <th>Keyword</th>
-                        <th>Abstracts</th>
-                        <th>Anzahl Abstracts</th>
-                    </tr>
-                    <tr id="filterrow">
-                      <th>Keyword</th>
-                      <th>Abstracts</th>
-                      <th>Anzahl Abstracts</th>
-                    </tr>
-                </thead>
-                <tbody id="myTableBody">
-                    <tr data-template="app:keywords"/>
-                </tbody>
-              </table>
+  <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"/>
+  <script type="text/javascript" src="https://code.highcharts.com/modules/no-data-to-display.js"/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h1>Keywords</h1>
+            <a>
+              <i class="fas fa-info" title="Info zum Keywords" data-toggle="modal" data-target="#exampleModal"/>
+            </a>
+            <a href="#chart">
+              <i class="fas fa-chart-bar"/>
+            </a>
           </div>
+
+          <div class="card-body containingloader">
+            <div class="loader" id="loader"/>
+            <table id="myTable" style="width:100%;display:none;" class="table table-striped table-condensed table-hover">
+              <thead>
+                <tr>
+                  <th>Keyword</th>
+                  <th>Anzahl Abstracts</th>
+                  <th>Abstracts</th>
+                </tr>
+                <tr id="filterrow">
+                  <th>Keyword</th>
+                  <th>Anzahl Abstracts</th>
+                  <th>Abstracts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-template="app:keywords"/>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2>Chart</h2>
+          </div>
+          <div class="card-body">
+            <div id="chart"/>
+          </div>
+        </div>
       </div>
-  <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Info zu Keywords</h5>
-        </div>
-        <div class="modal-body">
-            <p>
-                Eine Erklärung
-            </p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
-        </div>
     </div>
   </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  <script type="text/javascript" src="../resources/js/datatables.custom.js"/>
-  </div>
+  <script src="$app-root/resources/js/dt_highcharts.js"/>
+</div>

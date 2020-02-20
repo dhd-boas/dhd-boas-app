@@ -8,7 +8,7 @@ init();
 
 function init() {
   // initialize DataTables
-  const table = $("#dt-table").DataTable(
+  const table = $("#myTable").DataTable(
     {
       "language": {
       "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/German.json"
@@ -60,7 +60,9 @@ function init() {
     }
 
   );
-  $('#dt-table thead #filterrow th').each( function (colIndex) {
+  $("#loader").hide();
+  $("#myTable").show();
+  $('#myTable thead #filterrow th').each( function (colIndex) {
   var title = $(this).text();
   $(this).html( '<input type="text"/>' );
    $( 'input', this ).on( 'keyup change', function () {
