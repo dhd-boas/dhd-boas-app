@@ -331,6 +331,10 @@ declare function app:tocHeader($node as node(), $model as map(*)) {
                 <a href="{$zipUrl}">
                     <i class="fas fa-file-archive" title="Download Collection as ZIP"></i>
                 </a>
+                |
+                <a href="#chart">
+                  <i class="fas fa-chart-bar"/>
+                </a>
             </h3>
         </div>
 };
@@ -398,9 +402,11 @@ declare function app:toc($node as node(), $model as map(*)) {
         let $doctype := string-join($title//tei:keywords[@n='subcategory']//text(), '')
         let $keywords := for $x in $title//tei:keywords[@n='keywords']//tei:term/text() return <li>{$x}</li>
         let $topics := for $x in $title//tei:keywords[@n='topics']//tei:term/text() return <li>{$x}</li>
-        let $orgs := for $x in distinct-values($title//tei:affiliation//text())
+        let $orgs := distinct-values($title//tei:affiliation//text())
+        let $org_list := for $x in $orgs
           return <li>{$x}</li>
-        let $author := for $a in $title//tei:author//tei:*[name() = 'name' or name() = 'persName']
+        let $authors := $title//tei:author//tei:*[name() = 'name' or name() = 'persName']
+        let $author_list := for $a in $authors
           let $name := string-join($a//text(), ' ')
           return <li>{$name}</li>
         let $link2doc := if ($collection)
@@ -412,8 +418,10 @@ declare function app:toc($node as node(), $model as map(*)) {
         <tr>
             <td>{$link2doc}</td>
             <td>{$year}</td>
-            <td>{$author}</td>
-            <td>{$orgs}</td>
+            <td>{$author_list}</td>
+            <td>{count($authors)}</td>
+            <td>{$org_list}</td>
+            <td>{count($orgs)}</td>
             <td>{$doctype}</td>
             <td>{$keywords}</td>
             <td>{$topics}</td>
