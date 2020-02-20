@@ -109,6 +109,9 @@ function createHighcharts(data) {
   });
 
   Highcharts.chart("chart", {
+    chart: {
+      zoomType: 'x'
+    },
     title: {
       text: "DataTables to Highcharts"
     },
@@ -150,7 +153,7 @@ function createHighcharts(data) {
       shadow: true
     },
     credits: {
-      enabled: false
+      enabled: true
     },
     noData: {
       style: {
