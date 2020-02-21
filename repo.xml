@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <meta xmlns="http://exist-db.org/xquery/repo">
-    <description>Eine Web Applikation zur Analyse der Abstracts der DHd-Konferenzen.</description>
+    <description>Eine Web Applikation zur Analyse der Abstracts der DHd-Konferenzen und Beantwortung der wirklich wichtigen Fragen.</description>
     <author ref="http://d-nb.info/gnd/129199176">Peter Andorfer</author>
     <website/>
     <status>alpha</status>
