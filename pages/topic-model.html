@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
+<script src="https://code.highcharts.com/highcharts.js"/>
+<script src="https://code.highcharts.com/modules/heatmap.js"/>
+<script src="https://code.highcharts.com/modules/exporting.js"/>
+<script src="https://code.highcharts.com/modules/export-data.js"/>
+<script src="https://code.highcharts.com/modules/accessibility.js"/>
+<style/>
+
+  <div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h2>Eine Dokument/Topic Matrix as</h2>
+          </div>
+          <div class="card-body">
+            <figure class="highcharts-figure">
+              <div id="hc-container" style="height: 9000px;"/>
+              <p class="highcharts-description">
+                Heatmap showing employee data per weekday. Heatmaps are commonly used to visualize hot spots within data sets, and to show patterns or correlations. Due to their compact nature, they are often used with large sets of data.
+              </p>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="$app-root/resources/js/topic-model.js"/>
+</div>

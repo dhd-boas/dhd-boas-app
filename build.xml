@@ -13,6 +13,9 @@
     <copy todir="./data/indices">
       <fileset dir="../dhd-boas-data/indices"/>
     </copy>
+    <copy todir="./data/cache">
+      <fileset dir="../dhd-boas-data/cache"/>
+    </copy>
     <target name="xar">
         <mkdir dir="${build.dir}"/>
         <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar" excludes="${build.dir}/* data/temp/** temp/**"/>

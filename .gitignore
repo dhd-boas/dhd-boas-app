@@ -11,3 +11,4 @@ bower_components
 /*.xpr
 /data/editions
 /data/indices
+/data/cache
