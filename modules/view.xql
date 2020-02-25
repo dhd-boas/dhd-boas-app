@@ -7,12 +7,13 @@ xquery version "3.0";
 
 import module namespace templates="http://exist-db.org/xquery/templates" ;
 
-(: 
- : The following modules provide functions which will be called by the 
+(:
+ : The following modules provide functions which will be called by the
  : templating.
  :)
 import module namespace config="http://www.digital-archiv.at/ns/config" at "config.xqm";
 import module namespace app="http://www.digital-archiv.at/ns/templates" at "app.xql";
+import module namespace tm="https://digital-archiv/ns/tm" at "../tm/tm.xqm";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 

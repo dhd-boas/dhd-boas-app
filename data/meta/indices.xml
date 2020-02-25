@@ -12,7 +12,7 @@
             </author>
          </titleStmt>
          <publicationStmt>
-            <publisher/>
+            <t:publisher xmlns:t="http://www.tei-c.org/ns/1.0"/>
             <availability>
                <licence target="https://creativecommons.org/licenses/by/4.0/">
                   <p>The (CC BY 4.0)-License applies to this document.</p>
@@ -28,10 +28,10 @@
    </teiHeader>
    <text>
       <body>
-         <div>
+         <tei:div xmlns:tei="http://www.tei-c.org/ns/1.0">
             <head>About</head>
             <p>Some place to write about the documents stored in the collection indices</p>
-         </div>
+         </tei:div>
       </body>
    </text>
 </TEI>
