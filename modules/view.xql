@@ -13,7 +13,7 @@ import module namespace templates="http://exist-db.org/xquery/templates" ;
  :)
 import module namespace config="http://www.digital-archiv.at/ns/config" at "config.xqm";
 import module namespace app="http://www.digital-archiv.at/ns/templates" at "app.xql";
-import module namespace tm="https://digital-archiv/ns/tm" at "../tm/tm.xqm";
+import module namespace tmvis="https://digital-archiv/ns/tmvis" at "../tmvis/tmvis.xqm";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 
