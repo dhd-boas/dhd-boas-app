@@ -150,7 +150,7 @@
         </node>
         <node>
             <id>Literatur</id>
-            <color>#28a745</color>
+            <color>#dc3545</color>
             <label>Literatur</label>
         </node>
     </NodeTypes>
