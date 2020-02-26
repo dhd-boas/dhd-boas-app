@@ -18,4 +18,7 @@ for $resource in xmldb:get-child-resources(xs:anyURI($config:app-root||"/data/ca
   return sm:chmod(xs:anyURI($config:app-root||'/data/cache/'||$resource), "rwxrwxr-x"),
 
 for $resource in xmldb:get-child-resources(xs:anyURI($config:app-root||"/resolver/"))
-    return sm:chmod(xs:anyURI($config:app-root||'/resolver/'||$resource), "rwxrwxr-x")
+    return sm:chmod(xs:anyURI($config:app-root||'/resolver/'||$resource), "rwxrwxr-x"),
+
+for $resource in xmldb:get-child-resources(xs:anyURI($config:app-root||"/netvis/"))
+  return sm:chmod(xs:anyURI($config:app-root||'/netvis/'||$resource), "rwxrwxr-x")
