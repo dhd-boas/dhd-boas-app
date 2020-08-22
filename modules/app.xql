@@ -434,7 +434,7 @@ declare function app:toc($node as node(), $model as map(*)) {
 declare function app:keywords($node as node(), $model as map(*)) {
   let $keywords := distinct-values(collection($app:editions)//tei:keywords[@n='keywords']//tei:term/text())
   for $x in $keywords
-    let $abstracts := collection($app:editions)//tei:TEI[.//tei:term=$x]
+    let $abstracts := collection($app:editions)//tei:TEI[.//tei:keywords[@n='keywords']//tei:term=$x]
     let $ab_doc := for $ab in $abstracts
       let $ab_title := normalize-space(string-join($ab//tei:titleStmt//tei:title//text()))
       return
