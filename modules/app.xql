@@ -27,7 +27,7 @@ declare variable $app:purpose_de := "der Bereitstellung von Forschungsdaten";
 declare variable $app:purpose_en := "is the publication of research data.";
 
 declare variable $app:redmineBaseUrl := "https://shared.acdh.oeaw.ac.at/acdh-common-assets/api/imprint.php?serviceID=";
-declare variable $app:redmineID := "6930";
+declare variable $app:redmineID := "13529";
 declare variable $app:networkHtml := "../netvis/netvis.html?id=";
 
 declare function functx:contains-case-insensitive
